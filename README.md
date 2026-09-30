@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# APIForge — API Testing Playground
 
-## Getting Started
+A lightweight, premium browser-based API testing and request debugging playground for developers. Think of it as a sleek, fast, web-only alternative to Postman or Insomnia.
 
-First, run the development server:
+## Features
+
+- **Dynamic Request Builder:** Configure HTTP methods, URLs, headers, and query parameters dynamically.
+- **Syntax-Highlighted JSON Editor:** Built with Monaco Editor for formatting, validation, and advanced code editing.
+- **Detailed Response Viewer:** View status codes, response times, response sizes, headers, and format JSON beautifully.
+- **Request History:** Automatically saves your recent requests in localStorage for quick access.
+- **Saved Requests:** Bookmark your most used API calls.
+- **CORS Proxy:** Bypasses browser CORS restrictions using a Next.js serverless function.
+- **Responsive & Resizable Panels:** A true developer-tool layout with dragging panels, adaptable to mobile.
+
+## Screenshots
+
+*(Add screenshots of your deployed app here)*
+
+## Architecture & CORS Limitations
+
+APIForge operates primarily in the browser. However, browser security policies (CORS) normally prevent cross-origin HTTP requests to external APIs that don't explicitly allow them. 
+
+To solve this, APIForge uses a **Server-Side Proxy** (`/api/proxy`). When you send a request, the browser sends it to the Next.js backend, which performs the actual fetch and returns the response. This bypasses CORS and allows testing of any public API.
+
+## Security Considerations
+
+- **Client-Side Storage:** History and saved requests are stored locally in your browser (`localStorage`).
+- **No Secrets Stored:** The server proxy does not store or log any request data, headers, or body payloads.
+- **Warning:** Do not paste highly sensitive production credentials or API keys into public web tools. Only use test credentials or local development tokens when possible.
+
+## Local Setup
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/apiforge-api-playground.git
+   cd apiforge-api-playground
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+4. Open `http://localhost:3000` in your browser.
+
+## Deployment
+
+The easiest way to deploy this application is using [Vercel](https://vercel.com/):
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm i -g vercel
+vercel
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Future Improvements
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Environments and variables mapping
+- Authentication helpers (OAuth2, Bearer tokens preset)
+- GraphQL support
+- Code snippet generation (cURL, fetch, Python, etc.)
+- Export/Import workspaces
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## License
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT License
